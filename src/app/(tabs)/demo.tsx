@@ -2,29 +2,28 @@ import { useMigrations } from 'drizzle-orm/expo-sqlite/migrator';
 import { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 
-import { local_db } from '../../lib/db/index';
-import { usersTable } from '../../lib/db/schema';
+import { db } from '../../lib/db/index';
+import { users } from '../../lib/db/schema';
 import migrations from '../../lib/drizzle/migrations';
 export default function App() {
-  const { success, error } = useMigrations(local_db, migrations);
-  const [items, setItems] = useState<typeof usersTable.$inferSelect[] | null>(null);
+  const { success, error } = useMigrations(db, migrations);
+  const [items, setItems] = useState<typeof users.$inferSelect[] | null>(null);
   console.log(success, error);
   useEffect(() => {
     if (!success) return;
 
     (async () => {
-      await db.delete(usersTable);
+      await db.delete(users);
 
-      await db.insert(usersTable).values([
+      await db.insert(users).values([
         {
-          name: 'John',
-          age: 30,
-          email: 'john@example.com',
+          fullName: 'John Doe',
+          phone: '123-456-7890',
         },
       ]);
 
-      const users = await db.select().from(usersTable);
-      setItems(users);
+      const userss = await db.select().from(users);
+      setItems(userss);
     })();
   }, [success]);
 
@@ -65,7 +64,7 @@ export default function App() {
       }}
     >
       {items.map((item) => (
-        <Text key={item.id}>{item.email}</Text>
+        <Text key={item.id}>{item.fullName}</Text>
       ))}
     </View>
   );

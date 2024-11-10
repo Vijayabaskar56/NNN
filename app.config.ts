@@ -32,7 +32,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   icon: './assets/icon.png',
   userInterfaceStyle: 'automatic',
   // @ts-ignore
-  newArchEnabled : true,
+  newArchEnabled: true,
   splash: {
     image: './assets/splash.png',
     resizeMode: 'cover',
@@ -76,8 +76,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         "default": "development"
       }
     }],
-    "react-native-edge-to-edge",
-    // ["react-native-bottom-tabs", { "theme": "material2" }],
+    [
+      "react-native-edge-to-edge",
+      { "android": { "parentTheme": "Material3" } }
+    ],
+    ["react-native-bottom-tabs"],
     ['app-icon-badge', appIconBadgeConfig],
   ],
   extra: {

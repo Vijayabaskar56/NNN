@@ -21,7 +21,19 @@
       ],
       "@env": [
         "./src/core/env.js"
-      ]
+      ],
+      "@types/*": [
+        "./src/types/*"
+      ],
+      "@hooks/*": [
+        "./src/hooks/*"
+      ],
+      "@screens/*": [
+        "./src/screens/*"
+      ],
+      "@assets/*": [
+        "./assets/*"
+      ],
     },
     "esModuleInterop": true,
     "checkJs": true
@@ -34,7 +46,8 @@
     "cli",
     "android",
     "ios",
-    "lint-staged.config.js"
+    "lint-staged.config.js",
+    "**/*.spec.ts",
   ],
   "include": [
     "**/*.ts",

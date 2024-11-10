@@ -2,7 +2,7 @@ import { expo } from '@better-auth/expo';
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 
-import { local_db } from '@/lib/db';
+import { db } from '@/lib/db';
 
 
 export const auth = betterAuth({
@@ -10,7 +10,7 @@ export const auth = betterAuth({
     expo()
   ],
   trustedOrigins: ["myapp://"],
-  database: drizzleAdapter(local_db, {
+  database: drizzleAdapter(db, {
     provider: "pg", // or "mysql", "sqlite"
   })
 });
