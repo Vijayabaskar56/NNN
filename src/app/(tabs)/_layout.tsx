@@ -1,53 +1,108 @@
 import React from 'react';
-import { Platform } from 'react-native';
-
-import { Tabs } from '@/components/bottom-tab';
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Tabs } from 'expo-router';
 
-const homeIcon = Icon.getImageSourceSync('home', 24);
-// const exploreIcon = Icon.getImageSourceSync('compass', 24);
+import {
+  Feed as FeedIcon,
+  Settings,
+  Settings as SettingsIcon,
+  Style as StyleIcon,
+} from '@/components/ui/icons';
+import AnimatedHomeIcon from '@/components/ui/icons/home';
+import { BlurView } from 'expo-blur';
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
   return (
     <Tabs
+      initialRouteName="index"
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: '#ffffff',
+        tabBarInactiveTintColor: '#ffffff3f',
+        tabBarShowLabel: false,
         headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
-          },
-          default: {},
-        }),
-      }}>
+        tabBarStyle: {
+          position: 'absolute',
+          borderTopWidth: 0,
+          elevation: 0,
+          height: 84,
+          paddingTop: 0,
+          paddingBottom: 30,
+          backgroundColor: 'transparent',
+        },
+        tabBarBackground: () => (
+          <BlurView
+            tint="dark"
+            intensity={99}
+            style={{
+              position: 'absolute',
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: 84,
+            }}
+          />
+        ),
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: () => require('../../../assets/icon.png'),
+          title: 'Feed',
+          tabBarIcon: ({ color, focused, size }) => <AnimatedHomeIcon color={color} focused={focused} size={size} />,
+          animation: 'fade',
+          transitionSpec: {
+            animation: 'spring',
+            config: {
+              damping: 20,
+              mass: 1,
+              stiffness: 100,
+              overshootClamping: false,
+              restDisplacementThreshold: 0.01,
+              restSpeedThreshold: 0.01,
+            }
+          },
         }}
       />
       <Tabs.Screen
         name="explore"
         options={{
-          title: 'Explore',
-          tabBarIcon: () => require('../../../assets/icon.png'),
+          title: 'Style',
+          headerShown: false,
+          tabBarIcon: ({ color }) => <StyleIcon color={color} />,
+          animation: 'fade',
+          transitionSpec: {
+            animation: 'spring',
+            config: {
+              damping: 20,
+              mass: 1,
+              stiffness: 100,
+              overshootClamping: false,
+              restDisplacementThreshold: 0.01,
+              restSpeedThreshold: 0.01,
+            }
+          },
         }}
       />
       <Tabs.Screen
         name="demo"
         options={{
-          title: 'Demo',
-          tabBarIcon: () => require('../../../assets/icon.png'),
+          title: 'Settings',
+          headerShown: false,
+          tabBarIcon: ({ color }) => <Settings color={color} />,
+          animation: 'fade',
+          transitionSpec: {
+            animation: 'spring',
+            config: {
+              damping: 20,
+              mass: 1,
+              stiffness: 100,
+              overshootClamping: false,
+              restDisplacementThreshold: 0.01,
+              restSpeedThreshold: 0.01,
+            }
+          },
         }}
       />
     </Tabs>

@@ -80,7 +80,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
       "react-native-edge-to-edge",
       { "android": { "parentTheme": "Material3" } }
     ],
-    ["react-native-bottom-tabs"],
+    ["react-native-bottom-tabs", { "theme": "material2" }],
     ['app-icon-badge', appIconBadgeConfig],
   ],
   extra: {

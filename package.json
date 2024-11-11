@@ -55,6 +55,7 @@
     "@legendapp/motion": "^2.4.0",
     "@react-navigation/bottom-tabs": "7.0.0-rc.36",
     "@react-navigation/native": "7.0.0-rc.21",
+    "@shopify/react-native-skia": "^1.5.3",
     "app-icon-badge": "^0.1.1",
     "better-auth": "^0.7.1",
     "drizzle-orm": "^0.36.0",
