@@ -1,7 +1,7 @@
 import { drizzle } from 'drizzle-orm/expo-sqlite';
 // import { drizzle as drizzle_two } from 'drizzle-orm/node-postgres';
 import * as SQLite from 'expo-sqlite';
-const expo = SQLite.openDatabaseSync('db.db');
+const expo = SQLite.openDatabaseSync('db.db', { enableChangeListener: true });
 
 export const db = drizzle(expo);
 
